@@ -28,15 +28,16 @@ const vm = new Vue({
             var xmlhttp = new XMLHttpRequest();    
             xmlhttp.onreadystatechange = getResult;
             xmlhttp.open("GET", localApiUrl, true);
-            xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+            xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*"); // for CORS issue
             xmlhttp.send(null);
             
             function getResult() {
             
                 if (xmlhttp.readyState == 4) {
-                    console.log("completed");
+                    console.log("completed Fetching Menu Dishes from API");
                     var data = JSON.parse(xmlhttp.responseText);
-                    console.log(data);
+                    self.dishes = data
+                    //console.log(data[0]);
                 }
             }
 
