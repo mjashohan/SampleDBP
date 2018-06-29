@@ -20,13 +20,6 @@ var updateApiUrl = 'http://localhost:8000/api/v1/update-menu'; // local API Url
 var allDishApiUrl = 'http://localhost:8000/api/v1/items'; // local API Url
 Vue.config.debug = true;
 
-// filter restaurant address string
-Vue.filter('addressModifier', function (value) {
-    if (!value) return ''
-    value = value.replace(/<\/?[^>]+(>|$)/g, "");
-    return value;
-});
-
 
 const vm = new Vue({
     
@@ -40,6 +33,22 @@ const vm = new Vue({
     created: function () {
         
         this.fetchData();
+    },
+
+    filters: {
+        
+        // filter for restaurant address string
+        addressModifier: function (value) {
+            if (!value) return ''
+            value = value.replace(/<\/?[^>]+(>|$)/g, "");
+            return value;
+        },
+        // filter for empty price tag
+        priceModifier: function (value) {
+            if (value === "") {
+                return 'Price Not Availabe!';
+            }
+        }
     },
 
     methods: {
