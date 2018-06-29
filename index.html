@@ -31,10 +31,10 @@
           </div>
           <div class="card-section">
             <div class="columns medium-6">
-                <h6 class="ingredient-text">{{dish.ingredients}}</h6>
+                <h6 class="ingredient-text">{{dish.ingredients | tagModifier}}</h6>
             </div>
             <div class="columns medium-6">
-                <h6 class="address-text">{{dish.address | addressModifier}}</h6>
+                <h6 class="address-text">{{dish.address | tagModifier}}</h6>
             </div>  
           </div>
         </div>

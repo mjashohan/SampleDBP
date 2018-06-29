@@ -2,7 +2,7 @@
     javascript codes
 */
 
-// code for stylish console
+// code for stylish console :)
 var styles = [
     'background: limegreen'
     , 'border: 1px solid #3E0E02'
@@ -38,7 +38,7 @@ const vm = new Vue({
     filters: {
         
         // filter for restaurant address string
-        addressModifier: function (value) {
+        tagModifier: function (value) {
             if (!value) return ''
             value = value.replace(/<\/?[^>]+(>|$)/g, "");
             return value;
