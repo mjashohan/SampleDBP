@@ -12,7 +12,7 @@
 	border-left: 1px solid #20c525;
 
 	/* This makes room for the triangle */
-	margin-left: 19px;
+	margin-left: 15%;
 	
 	position: relative;
 	
@@ -73,4 +73,21 @@
 
 .card-divider{
     text-align: center !important;
+    font-weight: 700;    
+}
+
+#update-button-div{
+    text-align: right;
+}
+
+i{
+    cursor: pointer;
+}
+
+.address-text{
+	font-size: 12px;
+}
+
+.ingredient-text{
+	font-size: 14px;
 }
