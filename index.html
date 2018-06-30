@@ -4,7 +4,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Your Meal Solution</title>
+    <title>Your Food Solution</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
     <link rel="stylesheet" href="style.css">
@@ -26,14 +26,14 @@
             <div id="animated-div" v-if="noResult"></div> 
         </div>
         <div id="columns medium-12 update-button-div">
-            <h3 class="text-right"><i v-on:click="updatePage" class="fa fa-refresh fa-2x" title="Refresh Dishes"></i></h3></i>
+            <h3 class="text-right"><i v-on:click="updatePage" class="fa fa-refresh fa-2x" title="Update Dishes"></i></h3></i>
         </div>
       </div>
       
       <div class="columns medium-3" v-for="dish in dishes">
         <div class="card">
           <div class="card-divider">
-            <a :href="dish.webUrl" target="_blank">{{dish.itemName}}</a><span class="price-tag">{{dish.price}}</span>
+            <a :href="dish.webUrl" target="_blank">{{dish.itemName}}</a><span class="price-tag">{{dish.price | priceModifier}}</span>
           </div>
           <div class="card-section">
             <div class="columns medium-6">

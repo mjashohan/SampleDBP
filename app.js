@@ -49,8 +49,10 @@ const vm = new Vue({
         },
         // filter for empty price tag
         priceModifier: function (value) {
-            if (value === "") {
+            if (value == null) {
                 return 'Price Not Availabe!';
+            } else{
+                return value;
             }
         }
     },
