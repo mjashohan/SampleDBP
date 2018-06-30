@@ -93,7 +93,7 @@ div#animated-div {
 }
 
 .header-image{
-    background-image: url("assets/images/close-up-cooking-cuisine-958545.jpg");
+    background-image: url("../images/close-up-cooking-cuisine-958545.jpg");
     background-size: cover;
     background-position: center;
     height: 350px; 
