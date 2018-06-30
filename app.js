@@ -30,7 +30,8 @@ const vm = new Vue({
         searchValue: '',
         dishes: null,
         searching:false,
-        updating:false
+        updating:false,
+        noResult:false
     },
      
     created: function () {
