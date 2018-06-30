@@ -16,8 +16,8 @@ var styles = [
 ].join(';');
 
 
-var updateApiUrl = 'http://localhost:8000/api/v1/update-menu'; // local API Url
-var allDishApiUrl = 'http://localhost:8000/api/v1/items'; // local API Url
+var updateApiUrl = 'http://localhost:8000/api/v1/update-menu'; // local API endpoint for updating dishes
+var allDishApiUrl = 'http://localhost:8000/api/v1/items'; // local API endpoint for getting all dishes
 Vue.config.debug = true;
 
 
@@ -27,7 +27,10 @@ const vm = new Vue({
     
     data: {
         currentBranch: 'dev',
-        dishes: null
+        searchValue: '',
+        dishes: null,
+        searching:false,
+        updating:false
     },
      
     created: function () {
@@ -37,7 +40,7 @@ const vm = new Vue({
 
     filters: {
         
-        // filter for restaurant address string
+        // filter for removing unwanted tag syntex from string value
         tagModifier: function (value) {
             if (!value) return ''
             value = value.replace(/<\/?[^>]+(>|$)/g, "");
@@ -56,8 +59,7 @@ const vm = new Vue({
         fetchData: function () {
             
             var self = this;
-            
-            var xmlhttp = new XMLHttpRequest();    
+            var xmlhttp = new XMLHttpRequest();  // create new HTTP Request instance  
             xmlhttp.onreadystatechange = getResult;
             xmlhttp.open("GET", allDishApiUrl, true);
             xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*"); // for CORS issue
@@ -77,6 +79,7 @@ const vm = new Vue({
 
         updatePage: function() {
             
+            this.updating = true;
             var self = this;
             var xmlhttp = new XMLHttpRequest();    
             xmlhttp.onreadystatechange = getUpdatedResult;
@@ -90,11 +93,40 @@ const vm = new Vue({
                     console.log('%c Dishes updated!!', styles);
                     var data = JSON.parse(xmlhttp.responseText);
                     self.dishes = data;
+                    self.updating = false;
                 }
             }
-        } // update function ends
+        }, // update function ends
 
-    }
-      
+        searchDishes: function() {
+            
+            this.searching = true;
+            var self = this;
+            if(this.searchValue== ''){
+                self.fetchData;
+                self.searching = false;
+                location.reload(); // hard reload page for all dishes after empty search 
+            }else{
+                var xmlhttp = new XMLHttpRequest(); 
+                xmlhttp.onreadystatechange = getSearchResult;
+                xmlhttp.open("GET", `http://localhost:8000/api/v1/search/items/${encodeURIComponent(this.searchValue)}`, true);
+                xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*"); // for CORS issue
+                xmlhttp.send(null);
+                
+                function getSearchResult() {
+                
+                    if (xmlhttp.readyState == 4) {
+                        console.log('%c Search Completed!!', styles);
+                        var data = JSON.parse(xmlhttp.responseText);
+                        self.dishes = data;
+                        self.searching = false;
+                    }
+                }
+            } // else statement ends
+                
+		} // search function ends
 
+    } // method ends
+    
+    
 });

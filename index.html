@@ -14,13 +14,18 @@
 <body>
 
     <div class="container" id="app">
-      <div class="columns medium-12 header-image"></div>
+      <div class="columns medium-12 header-image">
+        <input id="searchInput" v-model="searchValue" type="search">
+        <span class="search-span" v-on:click="searchDishes"><i class="fa fa-search fa-2x" aria-hidden="true"></i></span> 
+      </div>
+      
       <div class="columns medium-12 header-text">
         <div id="columns medium-12">
-            <h3 class="text-center">Available Dishes..</h3>
+            <div id="animated-div" v-if="searching"></div>
+            <div id="animated-div" v-if="updating"></div> 
         </div>
-        <div id="columns medium-12 update-button-div" v-on:click="updatePage">
-            <h3 class="text-right"><i class="fa fa-refresh fa-2x" title="Refresh Dishes"></i></h3></i>
+        <div id="columns medium-12 update-button-div">
+            <h3 class="text-right"><i v-on:click="updatePage" class="fa fa-refresh fa-2x" title="Refresh Dishes"></i></h3></i>
         </div>
       </div>
       
